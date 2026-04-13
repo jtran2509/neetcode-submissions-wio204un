@@ -1,0 +1,22 @@
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
+        sorted_nums = sorted(list(set(nums))) # sort the array in non-decreasing order
+        res = 0 #longest streak
+        curr = sorted_nums[0] # first number
+        streak = 0
+        i = 0 # index
+
+        while i < len(sorted_nums):
+            if sorted_nums[i] != curr:
+                curr = sorted_nums[i]
+                streak = 0
+            
+            while i < len(sorted_nums) and sorted_nums[i] == curr:
+                i+=1
+            streak+=1 
+            curr+=1
+            res = max(res, streak)
+        return res
